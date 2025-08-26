@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Young Minds | Entrepreneurship for Kids</title>
+    <!-- Schoolbell Font for a handwritten feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Tailwind configuration to override default colors for a vibrant palette */
+        :root {
+            --color-primary: #FF6B6B; /* Bright red */
+            --color-secondary: #FFD166; /* Bright yellow */
+            --color-accent: #06D6A0; /* Bright green */
+            --color-text: #333333; /* Dark gray */
+            --color-bg-light: #F0F4C3; /* Pastel yellow-green */
+            --color-bg-medium: #FFE082; /* Pastel orange */
+        }
+        body {
+            font-family: 'Schoolbell', cursive, 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--color-bg-light);
+            color: var(--color-text);
+        }
+        /* Hand-drawn style borders and shadows */
+        .sketchy-border {
+            border: 4px solid var(--color-text);
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        .sketchy-border:hover {
+            transform: rotate(0deg);
+        }
+        .section-container {
+            border-radius: 2rem;
+            border-top-left-radius: 4rem;
+            border-bottom-right-radius: 4rem;
+        }
+        /* Custom scrollbar for a fun feel */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-light);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #fca5a5; /* red-300 */
+            border-radius: 10px;
+            border: 3px solid var(--color-bg-light);
+        }
+        /* Loading animation for the "thinking" state */
+        .loading-dots {
+            display: inline-flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .loading-dots div {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .loading-dots div:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots div:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dots div:nth-child(3) { animation-delay: 0s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        /* Icon jiggle animation */
+        .jiggle-animation:hover {
+            animation: jiggle 0.5s ease-in-out infinite;
+        }
+        @keyframes jiggle {
+            0% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+            100% { transform: rotate(-3deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white py-4 px-6 md:px-12 sketchy-border rounded-b-3xl transform-none">
+        <div class="flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 text-3xl font-bold text-gray-800" aria-label="Young Minds Home">
+                <!-- Young Minds Logo: Lightbulb + Brain + Stars -->
+                <span class="inline-block p-1 bg-yellow-200 rounded-xl jiggle-animation">
+                    <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-yellow-600">
+                        <title>Young Minds</title>
+                        <!-- soft badge -->
+                        <circle cx="32" cy="32" r="30" fill="#FEF3C7"/>
+                        <!-- stars for playful spark -->
+                        <path d="M50 16l1.5 3.5L55 21l-3.5 1.5L50 26l-1.5-3.5L45 21l3.5-1.5L50 16z" fill="#F59E0B"/>
+                        <path d="M14 22l1 2.2L17.2 25 15 26l-1 2.2L13 26l-2.2-1 2.2-0.8L14 22z" fill="#F97316"/>
+                        <!-- lightbulb outline -->
+                        <path d="M32 12c8 0 14 6.3 14 14 0 5-2.3 8.8-5.1 11.3-2.4 2.1-3.9 5-4.2 8.1H27.3c-0.3-3.1-1.8-6-4.2-8.1C20.3 34.8 18 31 18 26c0-7.7 6-14 14-14z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- brain squiggle filament -->
+                        <path d="M24.5 27.5c0-2.5 2.2-4.5 4.9-4.5 1 0 1.9.2 2.7.7.8-.5 1.7-.7 2.7-.7 2.7 0 4.9 2 4.9 4.5 0 1.6-.9 3-2.3 3.8.2.4.3.9.3 1.4 0 2-1.7 3.6-3.9 3.6-1 0-1.9-.3-2.6-.8-.7.5-1.6.8-2.6.8-2.2 0-3.9-1.6-3.9-3.6 0-.5.1-1 .3-1.4-1.4-.8-2.3-2.2-2.3-3.8z" fill="#34D399" stroke="#059669" stroke-width="1.2"/>
+                        <!-- bulb base -->
+                        <rect x="26" y="45" width="12" height="4" rx="1" fill="#94A3B8"/>
+                        <rect x="25" y="49" width="14" height="3" rx="1" fill="#64748B"/>
+                        <!-- tiny rocket hint for entrepreneurship -->
+                        <path d="M42 34c2-1 4 .8 3.4 2.9l-.6 2.1-2.1.6C40.6 40.2 38.9 38 40 36l2-2z" fill="#60A5FA"/>
+                        <path d="M41.2 40.2c-.8 1.1-2.6 2.2-4.4 2.4 1.1-1.7 1.5-3.3 1.6-4.4" stroke="#3B82F6" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                Young Minds
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 container mx-auto p-4 sm:p-6 md:p-8">
+
+        <!-- Hero Section -->
+        <div class="text-center py-16 px-6 bg-red-300 text-white sketchy-border section-container mb-12 transform-none">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-md">
+                Become a Young Entrepreneur!
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto drop-shadow-sm">
+                Discover how to turn your awesome ideas into a real-life business. It's like a game, but you're the boss!
+            </p>
+        </div>
+
+        <!-- What You'll Learn Section -->
+        <section class="py-8 md:py-12">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-red-500 mb-8 drop-shadow-md">What You'll Learn</h2>
+            
+            <!-- Course Curriculum Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-4xl mx-auto">
+                <!-- Curriculum Card 1: Finding an Idea -->
+                <div class="flex items-center gap-6 p-6 bg-amber-200 sketchy-border section-container transform -rotate-1 transition-transform duration-300 hover:rotate-0">
+                    <div class="p-3 bg-amber-400 rounded-full jiggle-animation flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-compass text-amber-800">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-amber-800">Finding a great idea</h3>
+                        <p class="mt-1">Discover what you're passionate about and turn it into a fantastic business idea.</p>
+                    </div>
+                </div>
+
+                <!-- Curriculum Card 2: Website using AI -->
+                <div class="flex items-center gap-6 p-6 bg-emerald-200 sketchy-border section-container transform rotate-1 transition-transform duration-300 hover:rotate-0">
+                    <div class="p-3 bg-emerald-400 rounded-full jiggle-animation flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot text-emerald-800">
+                            <path d="M12 8a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm0 0a4 4 0 0 0 4 4v12a4 4 0 0 0-4-4z"/>
+                            <path d="M10 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM18 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-emerald-800">Website with AI</h3>
+                        <p class="mt-1">Learn how to use smart AI tools to create your very own business website, no coding needed!</p>
+                    </div>
+                </div>
+
+                <!-- Curriculum Card 3: Social Media Videos -->
+                <div class="flex items-center gap-6 p-6 bg-fuchsia-200 sketchy-border section-container transform rotate-2 transition-transform duration-300 hover:rotate-0">
+                    <div class="p-3 bg-fuchsia-400 rounded-full jiggle-animation flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video text-fuchsia-800">
+                            <path d="M23 7l-7 5v-4l-7 5v-4l-7 5v-4z"/>
+                            <path d="M12 12l-5 5-5-5-5 5z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-fuchsia-800">Promote with videos</h3>
+                        <p class="mt-1">Shoot and edit fun, short videos to show off your products on social media.</p>
+                    </div>
+                </div>
+
+                <!-- Curriculum Card 4: Grow on Google -->
+                <div class="flex items-center gap-6 p-6 bg-cyan-200 sketchy-border section-container transform -rotate-2 transition-transform duration-300 hover:rotate-0">
+                    <div class="p-3 bg-cyan-400 rounded-full jiggle-animation flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up text-cyan-800">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                            <polyline points="16 7 22 7 22 13"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-cyan-800">Grow on Google</h3>
+                        <p class="mt-1">Learn simple tricks to make your business easy for people to find when they search online.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New: A Note for Parents Section -->
+        <section class="py-8 md:py-12">
+            <div class="bg-gray-200 p-8 sketchy-border section-container text-center transform -rotate-1 transition-transform duration-300 hover:rotate-0">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-700 mb-6 drop-shadow-md">A Note for Parents</h2>
+                <p class="text-lg max-w-2xl mx-auto">
+                    Welcome! We know you're looking for great ways to help your child learn and grow. This website is designed to be a fun, safe, and encouraging space for them to explore their creativity and learn about entrepreneurship. The tools and activities here help build valuable skills like problem-solving, planning, and confidence, all while they have a blast turning their ideas into reality.
+                </p>
+            </div>
+        </section>
+
+        <!-- Interactive Idea Generator -->
+        <section class="py-8 md:py-12">
+            <div class="bg-yellow-200 p-8 sketchy-border section-container">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center text-yellow-800 mb-6 drop-shadow-md">What's Your Big Idea?</h2>
+                <p class="text-center max-w-2xl mx-auto mb-6">
+                    Type your business idea below, and our super-smart AI helper will give you some fun advice to get started!
+                </p>
+
+                <div class="flex flex-col items-center">
+                    <textarea id="ideaInput" class="w-full max-w-2xl p-4 mb-4 text-lg sketchy-border rounded-xl shadow-inner focus:outline-none focus:border-yellow-500 focus:ring-4 focus:ring-yellow-300/50 transition-colors" rows="4" placeholder="Example: 'I want to sell friendship bracelets online.'"></textarea>
+                    
+                    <button id="submitBtn" class="bg-red-500 text-white font-bold py-3 px-8 sketchy-border rounded-full shadow-lg hover:bg-red-600 transform transition-transform duration-200 hover:scale-105 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                        Get Your Business Plan!
+                    </button>
+                </div>
+
+                <!-- Response Area -->
+                <div id="responseContainer" class="mt-8 p-6 bg-white sketchy-border rounded-3xl shadow-xl hidden">
+                    <h3 class="text-2xl font-semibold text-red-600 mb-3 drop-shadow-sm">Your Personalized Plan!</h3>
+                    <div id="responseContent">
+                        <!-- AI response will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator" class="hidden mt-8 text-center text-gray-500">
+                    <p class="text-xl font-medium mb-3">Thinking of something awesome...</p>
+                    <div class="loading-dots">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <!-- Error Message Box -->
+                <div id="errorBox" class="hidden mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl shadow-md" role="alert">
+                    <p class="font-bold">Oops!</p>
+                    <p>Something went wrong. Please try again in a little bit.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Registration Form Section -->
+        <section class="py-8 md:py-12">
+            <div class="bg-emerald-200 p-8 rounded-3xl shadow-lg border-4 border-emerald-300 flex flex-col items-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center text-emerald-800 mb-6 drop-shadow-md">Join the Young Minds Club!</h2>
+                <p class="text-center max-w-2xl mx-auto mb-6">
+                    Sign up to get amazing tips and tricks on starting your business!
+                </p>
+                <div class="w-full max-w-2xl text-center rounded-2xl border-2 border-emerald-400 overflow-hidden">
+                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9WMDkedo6yUqBjoLs02a9ST8d56J3qHJffjvFPNVb8Jgl3w/viewform?embedded=true" class="w-full h-[800px]" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 text-gray-600 text-center py-6 px-4 sketchy-border rounded-t-3xl transform-none">
+        <p class="text-sm">&copy; 2024 Young Minds. All rights reserved.</p>
+        <p class="text-xs mt-1">Made with creativity and a lot of fun!</p>
+    </footer>
+
+    <!-- Lucide Icons and Script -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@0.292.0/dist/lucide.min.js"></script>
+    <script>
+        // Get DOM elements for Idea Generator
+        const ideaInput = document.getElementById('ideaInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const responseContainer = document.getElementById('responseContainer');
+        const responseContent = document.getElementById('responseContent');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const errorBox = document.getElementById('errorBox');
+
+        // Function to handle the API call
+        async function getBusinessIdeaResponse(prompt) {
+            const payload = {
+                contents: [{
+                    parts: [{
+                        text: `You are a friendly and encouraging mentor for a kid's entrepreneurship website. The user is a child between 8 and 12 years old. Their business idea is: "${prompt}".
+
+                        Please provide a personalized, step-by-step business plan for them. Use simple, fun, and easy-to-understand language.
+
+                        The response must be in JSON format with the following fields:
+                        "businessName" (string, a cool name for their business),
+                        "tools" (array of strings, simple things they need),
+                        "howToMake" (string, one or two instructions to create the product/service),
+                        "howToShare" (string, one or two ideas to tell people),
+                        "howToSell" (string, a simple way to sell).`
+                    }]
+                }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            businessName: { type: "STRING" },
+                            tools: {
+                                type: "ARRAY",
+                                items: { type: "STRING" }
+                            },
+                            howToMake: { type: "STRING" },
+                            howToShare: { type: "STRING" },
+                            howToSell: { type: "STRING" }
+                        },
+                        required: ["businessName", "tools", "howToMake", "howToShare", "howToSell"]
+                    }
+                }
+            };
+
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            let retries = 0;
+            const maxRetries = 5;
+            let delay = 1000; // 1 second
+
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429) {
+                            // Too many requests, retry with exponential backoff
+                            retries++;
+                            delay = delay * 2;
+                            await new Promise(res => setTimeout(res, delay));
+                            continue;
+                        }
+                        // For other errors, throw and break the loop
+                        throw new Error(`API error: ${response.statusText || 'Unknown error'}`);
+                    }
+
+                    const result = await response.json();
+                    const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (!jsonText) {
+                        throw new Error("Invalid response format from API.");
+                    }
+                    
+                    return JSON.parse(jsonText);
+                } catch (error) {
+                    console.error("API call failed:", error);
+                    // Re-throw the error to be caught by the outer try/catch
+                    throw error;
+                }
+            }
+            throw new Error("Max retries reached. API call failed.");
+        }
+
+        // Event listener for the button click
+        submitBtn.addEventListener('click', async () => {
+            const idea = ideaInput.value.trim();
+            if (idea === '') {
+                // Do not proceed if the input is empty
+                return;
+            }
+
+            // Show loading state and hide previous results/errors
+            responseContainer.classList.add('hidden');
+            errorBox.classList.add('hidden');
+            loadingIndicator.classList.remove('hidden');
+            submitBtn.disabled = true;
+
+            try {
+                // Get AI response
+                const plan = await getBusinessIdeaResponse(idea);
+                
+                // Build the structured HTML from the JSON response
+                const htmlContent = `
+                    <h4 class="text-xl font-bold mb-2 text-red-600">${plan.businessName}</h4>
+                    
+                    <h5 class="text-lg font-semibold mt-4 mb-2 text-yellow-600">Step 1: Gather Your Tools</h5>
+                    <ul class="list-disc list-inside space-y-1 ml-4 text-gray-800">
+                        ${plan.tools.map(tool => <li>${tool}</li>).join('')}
+                    </ul>
+
+                    <h5 class="text-lg font-semibold mt-4 mb-2 text-yellow-600">Step 2: Make It!</h5>
+                    <p class="text-gray-800">${plan.howToMake}</p>
+                    
+                    <h5 class="text-lg font-semibold mt-4 mb-2 text-yellow-600">Step 3: Tell Everyone!</h5>
+                    <p class="text-gray-800">${plan.howToShare}</p>
+
+                    <h5 class="text-lg font-semibold mt-4 mb-2 text-yellow-600">Step 4: Time to Sell!</h5>
+                    <p class="text-gray-800">${plan.howToSell}</p>
+                `;
+                
+                // Display the structured response
+                responseContent.innerHTML = htmlContent;
+                responseContainer.classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Failed to get AI response:", error);
+                errorBox.classList.remove('hidden');
+            } finally {
+                // Hide loading state and re-enable button
+                loadingIndicator.classList.add('hidden');
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // This line was causing the error, because the Lucide library might not be ready yet.
+        // We'll move it out of the DOMContentLoaded listener and run it directly,
+        // as the script tag is at the end of the body, which guarantees the library is loaded.
+        lucide.createIcons();
+    </script>
+</body>
+</html>
